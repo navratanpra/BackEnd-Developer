@@ -140,3 +140,22 @@ router.get('/get-/films/:indexNumber',function(req, res){ //student detail api h
      res.send(moviesName[index])
      }
 })
+
+
+//Q1.  9th aug 2022
+// -write an api which gives the missing number in an array of integers starting from 1….e.g [1,2,3,5,6,7] : 4 is missing
+router.get('/missing:number',function) (req,res)
+let arr= [1,2,3,4,5,6,7,8,9,10,11,12,13]
+
+function missingNumber(arr){
+    for(let i=0; i <arr.length; i++){
+    if (i+1 !=arr[i]){
+        return arr [i]-1
+        //return console.log (this is missing from the array',arr[i]-1)
+        //
+    }else{
+    }
+}
+} 
+let result= missingNumber(arr)
+
