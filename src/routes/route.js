@@ -144,18 +144,202 @@ router.get('/get-/films/:indexNumber',function(req, res){ //student detail api h
 
 //Q1.  9th aug 2022
 // -write an api which gives the missing number in an array of integers starting from 1….e.g [1,2,3,5,6,7] : 4 is missing
-router.get('/missing:number',function) (req,res)
-let arr= [1,2,3,4,5,6,7,8,9,10,11,12,13]
+// router.get("/missing:number',function")
+//  (req,res)
+// let arr= [1,2,3,4,5,6,7,8,9,10,11,12,13]
 
-function missingNumber(arr){
-    for(let i=0; i <arr.length; i++){
-    if (i+1 !=arr[i]){
-        return arr [i]-1
-        //return console.log (this is missing from the array',arr[i]-1)
-        //
-    }else{
+// function missingNumber(arr){
+//     for(let i=0; i <arr.length; i++){
+//     if (i+1 !=arr[i]){
+//         return arr [i]-1
+//         //return console.log (this is missing from the array',arr[i]-1)
+//         //
+//     }else{
+//     }
+// }
+// } 
+// let result= missingNumber(arr)
+
+
+
+
+
+//assignment solution is here 10-8-22
+
+let players =[
+    {
+        "name":"manish",
+        "dob" :"1/1/1995",
+        "gender":"male",
+        "city":"jalandhar",
+        "sports":[
+            "swimming"
+        ],
+    },
+     
+    {
+        "name":"gopal",
+        "dob" :"1/09/1995",
+         "gender": "male",
+         "city" :"delhi",
+         "sports":[
+            "soccer"
+         ],
+    },
+      
+     {
+         "name":"lokesh",
+         "dob" :"1/1/1990",
+         "gender":"male",
+          "city":"mumbai",
+          "sports":[
+            "soccer"
+          ],
+          
+        },
+        
+    ]
+   
+    router.post('/players1', function(req, res) {
+            let isRepeat = false
+    for (let i = 0; i < players.length; i++) {
+         if (players[i].name == req.body.name ) {
+             isRepeat = true
+                 break;
+             }
+         }
+if (isRepeat == true) {
+ res.send("Data already existed")
+ } else {
+     players.unshift(req.body)
+ res.send(players)
+ }
+})   
+
+
+
+
+// 10th august 1st assignment
+
+// router.post("/players", function (req, res) {
+//     for (let i = 0; i < players.length; i++) {
+//         if (players[i].name === req.body.name) {
+//             return res.send("player present");
+//         }
+//     }
+
+//     players.push(req.body);
+//     return res.send({ mes: players, status: true });
+// });
+
+
+
+
+
+
+
+//2nd assignment
+
+
+let booking = [
+    {
+        bookingNumber: 1,
+        bookingId: 12,
+        sportId: "",
+        centerId: "",
+        type: "private",
+        slot: "16286598000000",
+        bookedOn: "31/08/2021",
+        bookedFor: "01/09/2021",
+    },{
+        bookingNumber: 2,
+        bookingId: 13,
+        sportId: "",
+        centerId: "",
+        type: "private",
+        slot: "16286598000000",
+        bookedOn: "31/08/2021",
+        bookedFor: "01/09/2021",
+    },{
+        bookingNumber: 3,
+        bookingId: 13,
+        sportId: "",
+        centerId: "",
+        type: "private",
+        slot: "16286598000000",
+        bookedOn: "31/08/2021",
+        bookedFor: "01/09/2021",
+    },
+];
+
+router.post("/players/:playerName/bookings/:bookingId", function (req, res) {
+    let playerExist = false
+    for (let i = 0; i < players.length; i++) {
+        if (players[i].name == req.params.playerName) {
+            playerExist = true
+        }
     }
-}
-} 
-let result= missingNumber(arr)
+    if (!playerExist) {
+        return res.send("This player does not exist")
+    }
+    for (let i = 0; i < booking.length; i++) {
+        if ((booking[i].bookingId == req.params.bookingId)) {
+            return res.send("This booking id already existed in Data");
+        }
+    }
+    req.body.playerName = req.params.playerName
+    req.body.bookingId = req.params.bookingId
 
+    booking.push(req.body);
+    return res.send(booking);
+});
+
+
+//3rd assignment solution:-
+
+let persons = [
+    {
+      name : "PK",
+      age : 10,
+      votingstatus : false
+    },
+    {
+        name : "Sk",
+        age : 20,
+        votingstatus : false
+    },
+    {
+        name : "AA",
+        age : 70,
+        votingstatus : false
+    },
+    {
+        name : "SC",
+        age : 5,
+        votingstatus : false
+    },
+    {
+        name : "HQ",
+        age : 40,
+        votingstatus : false
+    }
+]
+
+router.post('/voters1', function(req, res) {
+    //let result0 = req.query.age
+        let result = [];
+        for (let i = 0; i < persons.length; i++) {
+        let person = persons[i];
+        if (person.age >= 18 ) {
+            person.votingStatus = true
+            result.push(person)
+        }}
+        if (req.query.age >= 18) {
+            res.send(result)
+        } else {
+            res.send("not eligible for voting")
+        }
+    })
+
+
+    module.exports = router
