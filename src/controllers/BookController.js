@@ -1,22 +1,23 @@
-const BookModel= require("../models/BookModel")
+// const BookModel= require("../models/BookModel")
 
-const createBook= async function (req, res) {
-    let data= req.body
-    let savedData= await BookModel.create(data)
-    res.send({msg: savedData})
-}
+// const createBook= async function (req, res) {
+//     let data= req.body
+//     let savedData= await BookModel.create(data)
+//     res.send({msg: savedData})
+// }
 
-const getBooksData= async function (req, res) {
-    let allBooks= await BooksModel.find()
-    res.send({msg: allBooks})
-}
-module.exports.createBook= createBook
-module.exports.getBooksData= getBooksData
+// const getBooksData= async function (req, res) {
+//     let allBooks= await BooksModel.find()
+//     res.send({msg: allBooks})
+// }
+// module.exports.createBook= createBook
+// module.exports.getBooksData= getBooksData
 
 
-_//____________________________________xxxxxxxxxxx________________________________________________
+//____________________________________xxxxxxxxxxx________________________________________________
 
 //16august assignment
+
 
 const { count } = require("console");
 const BookModel = require("../models/bookModel");
@@ -26,6 +27,7 @@ const createBook = async function (req, res) {
   let savedData = await BookModel.create(data);
   res.send({ msg: savedData });
 };
+
 //------------------------2------------------------
 const bookList = async function (req, res) {
   let savedData = await BookModel.find().select({bookName: 1, authorName: 1, _id: 0});
@@ -33,12 +35,14 @@ const bookList = async function (req, res) {
 };
 //----------------------------3-------------------------------
 const getBooksInYear = async function (req, res) {
-  let savedData = await BookModel.find({year: { $eq: req.body.year}})
+  let savedData = await BookModel.find({year: { $eq: req.params.year}})
   res.send({ msg: savedData });
 };
 //----------------------------4--------------------------------
 const getParticularBooks = async function (req, res) {
-  let savedData = await BookModel.find(req.body);
+  let condition= req.body
+let savedData=BookModel.find( condition )
+
   res.send({ msg: savedData });
 };
 //-----------------------------5-----------------------------------
