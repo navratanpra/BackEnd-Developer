@@ -7,9 +7,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
-mongoose.connect("mongodb+srv://navratanp:ORPNqe8p2qYtM8K7@cluster0.bsr8sey.mongodb.net/prajapatiDB?retryWrites=true&w=majority", {
+mongoose.connect("mongodb+srv://navratanp:ORPNqe8p2qYtM8K7@cluster0.bsr8sey.mongodb.net/prajapati-DB?retryWrites=true&w=majority", {
     useNewUrlParser: true
+
 })
 .then( () => console.log("MongoDb is connected"))
 .catch ( err => console.log(err) )
@@ -17,6 +17,6 @@ mongoose.connect("mongodb+srv://navratanp:ORPNqe8p2qYtM8K7@cluster0.bsr8sey.mong
 app.use('/', route);
 
 
-app.listen(process.env.PORT || 3000, function () {
-    console.log('Express app running on port ' + (process.env.PORT || 3000))
+app.listen(process.env.PORT || 5000, function () {
+    console.log('Express app running on port ' + (process.env.PORT || 5000))
 });
