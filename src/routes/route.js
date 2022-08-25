@@ -68,3 +68,7 @@ router.get('/register',  UserController.commonHandler, function(req, res){
 
 
 module.exports = router;
+
+
+
+router.get("/func",BookController.func)

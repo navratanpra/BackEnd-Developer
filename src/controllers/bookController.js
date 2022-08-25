@@ -59,7 +59,29 @@ const totalSalesPerAuthor = async function (req, res) {
     )
 
     res.send({ msg: allAuthorSales })
+
 }
+
+// assignment 24th august
+
+
+
+const moment = require('moment')
+const func =   function (req,res,next){ 
+    const time = moment();
+ console.log(time.format('yyyy,MM,DD'))
+ console.log(time.date)
+ console.log(req.ip)
+ console.log(req.originalUrl)
+ next()
+
+}
+
+module.exports.func = func
+
+
+
+
 
 
 
