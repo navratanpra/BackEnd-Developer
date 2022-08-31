@@ -18,7 +18,7 @@ const loginUser = async (req, res) => {
     let user = await userModel.findOne({ emailId: userName, password: password });
     if (!user) return res.send({ status: false, msg: "username or the password is not correct" });
     //---------------------token generation-------------------------
-    const token = jwt.sign({ userId: user._id.toString(), place: "Murshidabad" }, "Shayan Biswas");
+    const token = jwt.sign({ userId: user._id.toString(), place: "rajasthan" }, "prajapati");
     res.setHeader("x-auth-token", token);
     res.send({ status: true, token: token });
   }

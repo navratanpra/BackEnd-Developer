@@ -9,7 +9,7 @@ const tokenVerification = async (req, res, next) => {
         // let token = req.headers["x-auth-token"];
         if (!token) return res.send({ status: false, msg: "token must be present" });
         //---------------------------token verification------------------------------
-        const decodedToken = jwt.verify(token, "Shayan Biswas");
+        const decodedToken = jwt.verify(token, "prajapati");
         if (!decodedToken) return res.send({ status: false, msg: "token is invalid" });
         //---------------------------finding user------------------------------
         const userId = req.params.userId;
