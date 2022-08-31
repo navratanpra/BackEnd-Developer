@@ -8,6 +8,6 @@ router.post("/login", userController.loginUser)
 router.get("/users/:userId", middleware.tokenVerification, userController.getUserData)
 router.put("/users/:userId", middleware.tokenVerification, userController.updateUser)
 router.delete("/users/:userId", middleware.tokenVerification, userController.deleteUser)
-router.post("/users/:userId/post", middleware.tokenVerification, userController.postMassage)
+router.post("/users/:userId", middleware.tokenVerification, userController.postMassage)
 
 module.exports = router;
