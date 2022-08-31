@@ -71,3 +71,9 @@ const postMassage = async (req, res) => {
 };
 
 module.exports = { createUser, loginUser, getUserData, updateUser, deleteUser, postMassage }
+
+
+
+//dhfjhjhfjhjfhwuirh
+//ufhiewhfuwjdinjnj
+//fehjhefjshfj
