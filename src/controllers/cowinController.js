@@ -1,8 +1,15 @@
 let axios = require("axios")
+const userModel = require("../models/userModel")
+
+
+let createUser = async function (req,res) {
+    let savedData = await userModel.create(req.body)
+    return res.status(201).send({status:true, msg : savedData})
+}
 
 
 let getStates = async function (req, res) {
-
+    
     try {
         let options = {
             method: 'get',
@@ -22,7 +29,7 @@ let getStates = async function (req, res) {
 
 let getDistricts = async function (req, res) {
     try {
-        let id = req.params.stateId
+        let id = req.query.stateId
         let options = {
             method: "get",
             url: `https://cdn-api.co-vin.in/api/v2/admin/location/districts/${id}`
@@ -57,6 +64,7 @@ let getByPin = async function (req, res) {
     }
 }
 
+
 let getOtp = async function (req, res) {
     try {
         let blahhh = req.body
@@ -78,8 +86,41 @@ let getOtp = async function (req, res) {
     }
 }
 
+//1st cowin controller:
+
+let getDistrictSessions= async function (req,res) {
+    try {
+        let districtId = req.query.districtId
+        let date = req.query.date
+        let options = {
+            method: "get",
+            url :  `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${districtId}&date=${date}`
+
+
+        }
+
+        let result = await axios (options)
+        console.log(`result.data`)
+        res.status(200).send ({msg:   result.data})
+        
+
+    }
+
+    catch (err) {
+        console.log (err)
+        res.status(500).send({msg: err.message})
+
+    }
+}
+
+
+
+
+
 
 module.exports.getStates = getStates
 module.exports.getDistricts = getDistricts
 module.exports.getByPin = getByPin
 module.exports.getOtp = getOtp
+module.exports.createUser = createUser
+module.exports.getDistrictSessions = getDistrictSessions
