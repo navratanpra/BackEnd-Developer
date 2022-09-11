@@ -21,6 +21,12 @@ const createAuthor = async function (req, res) {
       return res
         .status(400)
         .send({ status: false, msg: "Title Is A mandatory Field" });
+    if (
+      authorData.title !== "Mr" &&
+      authorData.title !== "Miss" &&
+      authorData.title !== "Mrs"
+    )
+      return res.status(400).send({ status: false, msg: "Title not correct" });
 
     let validEmail = validator.validate(authorData.email);
     if (validEmail === false)
@@ -30,7 +36,9 @@ const createAuthor = async function (req, res) {
         .status(400)
         .send({ status: false, msg: "Password is Mandatory" });
     let savedData = await authorModel.create(authorData);
-    return res.status(201).send({ status: true,msg:"author created", data: savedData });
+    return res
+      .status(201)
+      .send({ status: true, msg: "author created", data: savedData });
   } catch (error) {
     return res.status(500).send({ status: false, message: error.message });
   }
@@ -41,8 +49,14 @@ const loginUser = async function (req, res) {
     let userName = req.body.email;
     let password = req.body.password;
 
-    let user = await authorModel.findOne({ email: userName, password: password });
-    if (!user)    return res.status(404).send({status: false, msg: "eamil or password is incorrect",});
+    let user = await authorModel.findOne({
+      email: userName,
+      password: password,
+    });
+    if (!user)
+      return res
+        .status(404)
+        .send({ status: false, msg: "eamil or password is incorrect" });
 
     let token = jwt.sign(
       {
@@ -52,13 +66,11 @@ const loginUser = async function (req, res) {
       },
       "Project1-gp39"
     );
-    res.setHeader("x-api-key",token);
+    res.setHeader("x-api-key", token);
     res.status(200).send({ status: true, token: token });
-
   } catch (error) {
-    res.status(500).send({status : false, msg : error.message})
+    res.status(500).send({ status: false, msg: error.message });
   }
-  
 };
 
 module.exports.createAuthor = createAuthor;
