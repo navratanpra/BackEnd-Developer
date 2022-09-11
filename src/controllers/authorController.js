@@ -9,18 +9,18 @@ const createAuthor = async function (req, res) {
       return res
         .status(400)
         .send({ status: false, msg: "First name is mandatory" });
-    if (typeof authorData.fname !== "String")
+    if (typeof authorData.fname !== "string")
       return res.status(400).send({ status: false, msg: "Invalid First Name" });
     if (!authorData.lname)
       return res
         .status(400)
         .send({ status: false, msg: "Last Name Is Mandatory" });
-    if (typeof authorData.lname !== "String")
+    if (typeof authorData.lname !== "string")
       return res.status(400).send({ status: false, msg: "Invalid Last Name" });
     if (!authorData.title)
       return res
         .status(400)
-        .send({ status: false, msg: "Title Is A Mandatory Field" });
+        .send({ status: false, msg: "Title Is A mandatory Field" });
 
     let validEmail = validator.validate(authorData.email);
     if (validEmail === false)
@@ -36,23 +36,23 @@ const createAuthor = async function (req, res) {
   }
 };
 
-
 const loginUser = async function (req, res) {
   try {
     let userName = req.body.email;
     let password = req.body.password;
 
     let user = await authorModel.findOne({ email: userName, password: password });
-    if (!user)    return res.status(404).send({status: false, msg: "User not found",});
+    if (!user)    return res.status(404).send({status: false, msg: "eamil or password is incorrect",});
 
     let token = jwt.sign(
       {
-        userId: user._id.toString(),
+        authorId: user.authorId,
         batch: "plutonium",
         project: "First",
       },
       "Project1-gp39"
     );
+    res.setHeader("x-api-key",token);
     res.status(200).send({ status: true, token: token });
 
   } catch (error) {
