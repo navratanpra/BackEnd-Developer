@@ -13,9 +13,9 @@ mongoose.connect("mongodb+srv://rahul_8651080470:7tvW8IuaU608kdhl@cluster0.zmjte
 .catch( err => console.log(err) )
 
 
-app.use('/', route);
+app.use('/', route); // it will access my route file.
 
-
+//3000 is my port which i am using to connect with the server
 app.listen(process.env.PORT || 3000, function () {
     console.log('Express app running on port ' + (process.env.PORT || 3000))
 });

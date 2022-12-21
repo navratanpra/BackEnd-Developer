@@ -31,6 +31,7 @@ publishedAt:Date,
 isPublished:{
     type:Boolean,
     default:false
+    
 }
 
 
